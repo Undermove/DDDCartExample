@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCartApp", "src\DDDCartAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCartAppTests", "DDDCartAppTests\DDDCartAppTests.csproj", "{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCartAppDomain", "DDDCartAppDomain\DDDCartAppDomain.csproj", "{0C7D952D-66B2-4EA8-A3AC-2298049C24F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C7D952D-66B2-4EA8-A3AC-2298049C24F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7D952D-66B2-4EA8-A3AC-2298049C24F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7D952D-66B2-4EA8-A3AC-2298049C24F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7D952D-66B2-4EA8-A3AC-2298049C24F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

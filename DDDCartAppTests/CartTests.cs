@@ -1,3 +1,5 @@
+using System;
+using DDDCartAppDomain;
 using NUnit.Framework;
 
 namespace DDDCartAppTests
@@ -10,9 +12,16 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void Test1()
+		public void WhenAddProductToCartEventReceived_ThenProductShouldBeAdded()
 		{
-			Assert.Pass();
+			CartId id = new CartId($"cart-{Guid.NewGuid()}"); 
+			Cart cart = new Cart(id);
+			AddProductEvent addProductEvent = new AddProductEvent();
+
+			cart.Apply(addProductEvent);
+
+			Assert.NotNull(cart.Products, "Products property should not be bull by default");
+			Assert.True(cart.Products.Count == 1);
 		}
 	}
 }
