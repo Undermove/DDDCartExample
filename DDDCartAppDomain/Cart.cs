@@ -4,20 +4,20 @@ using EventFlow.Aggregates;
 
 namespace DDDCartAppDomain
 {
-    public class Cart : AggregateRoot<Cart, CartId>
+  public class Cart : AggregateRoot<Cart, CartId>
+  {
+    private readonly List<Product> _products;
+
+    public Cart(CartId id) : base(id)
     {
-		private readonly List<Product> _products;
-
-        public Cart(CartId id) : base(id)
-        {
-			_products = new List<Product>();
-        }
-
-        public List<Product> Products => _products;
-
-		public void Apply(ProductAddedEvent addProductEvent)
-		{
-			_products.Add(addProductEvent.Product);
-		}
+      _products = new List<Product>();
     }
+
+    public List<Product> Products => _products;
+
+    public void Apply(ProductAddedEvent addProductEvent)
+    {
+      _products.Add(addProductEvent.Product);
+    }
+  }
 }
