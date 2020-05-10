@@ -39,7 +39,7 @@ namespace DDDCartAppTests
 
 			var cartProduct = _cart.Products.First();
 			Assert.NotNull(cartProduct.Id);
-			Assert.True(cartProduct.Id == _product.Id);
+			Assert.AreEqual(_product.Id, cartProduct.Id);
 		}
 
 		[Test]
@@ -51,7 +51,7 @@ namespace DDDCartAppTests
 
 			var cartProduct = _cart.Products.First();
 			Assert.NotNull(cartProduct.Name);
-			Assert.True(cartProduct.Name == _product.Name);
+			Assert.AreEqual(_product.Name, cartProduct.Name);
 		}
 	}
 }
