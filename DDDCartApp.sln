@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCartApp", "src\DDDCartApp\DDDCartApp.csproj", "{B1584302-CE88-475D-BC9C-E4AA0F041EAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCartAppTests", "DDDCartAppTests\DDDCartAppTests.csproj", "{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B1584302-CE88-475D-BC9C-E4AA0F041EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1584302-CE88-475D-BC9C-E4AA0F041EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1584302-CE88-475D-BC9C-E4AA0F041EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2050C1-6CD1-4E9F-B341-71AA09D330EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
