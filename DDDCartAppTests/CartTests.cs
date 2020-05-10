@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace DDDCartAppTests
 {
-	public class Tests
+	public class CartTests
 	{
 		[SetUp]
 		public void Setup()
