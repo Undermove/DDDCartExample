@@ -6,11 +6,13 @@ namespace DDDCartAppDomain
     {
         public ProductId Id { get; }
         public string Name { get; }
+        public double Price { get; }
 
-        public Product(ProductId id, string name)
+        public Product(ProductId id, string name, double price)
         {
             Id = id;
             Name = name;
+            Price = price;
         }
     }
 }

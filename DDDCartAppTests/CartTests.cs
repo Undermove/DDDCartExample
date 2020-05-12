@@ -16,7 +16,7 @@ namespace DDDCartAppTests
 			CartId cartId = new CartId($"cart-{Guid.NewGuid()}"); 
 			_cart = new Cart(cartId);
 			ProductId productId = new ProductId(Guid.NewGuid());
-			_product = new Product(productId, "Milk");
+			_product = new Product(productId, "Milk", 90);
 		}
 
 		[Test]
@@ -52,6 +52,16 @@ namespace DDDCartAppTests
 			var cartProduct = _cart.Products.First();
 			Assert.NotNull(cartProduct.Name);
 			Assert.AreEqual(_product.Name, cartProduct.Name);
+		}
+
+		[Test]
+		public void WhenProductAddedEventReceived_ThenCartProductPriceShouldBeEqualWithProductPriceFromEvent()
+		{
+			ProductAddedEvent productAdded = new ProductAddedEvent(_product);
+
+			_cart.Apply(productAdded);
+			
+			Assert.AreEqual(_product.Price, _cart.Products.First().Price);
 		}
 	}
 }
