@@ -7,6 +7,7 @@ using EventFlow.Extensions;
 using NUnit.Framework;
 using Microsoft.Extensions.DependencyInjection;
 using EventFlow.DependencyInjection.Extensions;
+using EventFlow.Aggregates;
 
 namespace DDDCartAppTests
 {
@@ -26,10 +27,16 @@ namespace DDDCartAppTests
                 .CreateResolver();
 
             var commandBus = resolver.Resolve<ICommandBus>();
+            var aggregateStore = resolver.Resolve<IAggregateStore>();
 
+            CartId cartId = CartId.NewCartId();
             await commandBus.PublishAsync(
-                new AddProductCommand(CartId.NewCartId(), new ProductId(Guid.Empty)), 
+                new AddProductCommand(cartId, new ProductId(Guid.Empty)), 
                 CancellationToken.None);
+
+            Cart cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
+
+            Assert.AreEqual(1, cart.Products.Count);
         }
     }
 }
