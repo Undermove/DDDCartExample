@@ -10,5 +10,10 @@ namespace DDDCartAppDomain
         {
             _id = id;
         }
+
+        public static ProductId NewProductId()
+        {
+            return new ProductId(Guid.NewGuid());
+        }
     }
 }

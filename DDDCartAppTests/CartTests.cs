@@ -63,5 +63,18 @@ namespace DDDCartAppTests
 			
 			Assert.AreEqual(_product.Price, _cart.Products.First().Price);
 		}
+
+		[Test]
+		public void WhenTwoProductAddedEventsReceived_ThenCartShouldContainTwoProducts()
+		{
+			ProductAddedEvent firstProductAddedEvent = new ProductAddedEvent(_product);
+			ProductAddedEvent secondProductAddedEvent = new ProductAddedEvent(_product);
+
+			_cart.Apply(firstProductAddedEvent);
+			_cart.Apply(secondProductAddedEvent);
+
+			Assert.NotNull(_cart.Products);
+			Assert.AreEqual(2, _cart.Products.Count);
+		}
 	}
 }

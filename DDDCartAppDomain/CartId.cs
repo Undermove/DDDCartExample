@@ -1,3 +1,4 @@
+using System;
 using EventFlow.Core;
 
 namespace DDDCartAppDomain
@@ -6,6 +7,11 @@ namespace DDDCartAppDomain
     {
         public CartId(string value) : base(value)
         {
+        }
+
+        public static CartId NewCartId()
+        {
+            return new CartId($"cart-{Guid.NewGuid()}");
         }
     }
 }
