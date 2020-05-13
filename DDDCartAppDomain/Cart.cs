@@ -19,5 +19,10 @@ namespace DDDCartAppDomain
     {
       _products.Add(addProductEvent.Product);
     }
-  }
+
+        internal void AddProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

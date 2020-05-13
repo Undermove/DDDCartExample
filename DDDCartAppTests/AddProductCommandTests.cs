@@ -8,7 +8,11 @@ namespace DDDCartAppTests
         [Test]
         public void CreateAddProductCommandTest()
         {
-            AddProductCommand addProductCommand = new AddProductCommand(CartId.NewCartId(), ProductId.NewProductId());
+            var productId = ProductId.NewProductId();
+
+            AddProductCommand addProductCommand = new AddProductCommand(CartId.NewCartId(), productId);
+
+            Assert.AreEqual(productId, addProductCommand.ProductId);
         }
     }
 }

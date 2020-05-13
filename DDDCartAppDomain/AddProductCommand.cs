@@ -1,6 +1,5 @@
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
-using EventFlow.Core;
 
 namespace DDDCartAppDomain
 {
@@ -8,6 +7,9 @@ namespace DDDCartAppDomain
     {
         public AddProductCommand(CartId aggregateId, ProductId productId) : base(aggregateId)
         {
+            ProductId = productId;
         }
+
+        public ProductId ProductId { get; }
     }
 }
