@@ -1,6 +1,8 @@
+using EventFlow.Aggregates;
+
 namespace DDDCartAppDomain
 {
-    public class ProductAddedEvent
+    public class ProductAddedEvent: IAggregateEvent<Cart, CartId>
     {
         public ProductAddedEvent(Product product)
         {
