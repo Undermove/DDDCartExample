@@ -8,6 +8,9 @@ using NUnit.Framework;
 using Microsoft.Extensions.DependencyInjection;
 using EventFlow.DependencyInjection.Extensions;
 using EventFlow.Aggregates;
+using System.Data.Common;
+using EventFlow.EntityFramework.Extensions;
+using EventFlow.EntityFramework;
 
 namespace DDDCartAppTests
 {
@@ -19,8 +22,12 @@ namespace DDDCartAppTests
             var services = new ServiceCollection();
             services.AddTransient<IProductRepository, FakeProductRepository>();
 
-            var resolver = EventFlowOptions.New
+            using var resolver = EventFlowOptions.New
                 .UseServiceCollection(services)
+                .AddDefaults(typeof(CartContext).Assembly)
+                .UseEntityFrameworkEventStore<CartContext>()
+                .ConfigureEntityFramework(EntityFrameworkConfiguration.New) 
+                .AddDbContextProvider<CartContext, MySqlCartContextProvider>()
                 .AddEvents(typeof(ProductAddedEvent))
                 .AddCommands(typeof(AddProductCommand))
                 .AddCommandHandlers(typeof(AddProductCommandHandler))
@@ -37,6 +44,14 @@ namespace DDDCartAppTests
             Cart cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
 
             Assert.AreEqual(1, cart.Products.Count);
+        }
+
+        private static Uri GetUriFromConnectionString(string connectionString)
+        {
+            DbConnectionStringBuilder builder = new DbConnectionStringBuilder { ConnectionString = connectionString };
+            string connectTo = (string)builder["ConnectTo"];
+
+            return connectTo == null ? null : new Uri(connectTo);
         }
     }
 }

@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  mysql:
+    image: percona:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+
+  pgsql:
+    image: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "my_password"
+    ports:
+      - "5432:5432"
