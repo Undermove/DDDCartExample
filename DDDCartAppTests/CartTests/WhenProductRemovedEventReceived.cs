@@ -1,4 +1,5 @@
 ﻿using DDDCartAppDomain;
+using DDDCartAppTests.DSL;
 using NUnit.Framework;
 
 namespace DDDCartAppTests.CartTests
@@ -8,13 +9,13 @@ namespace DDDCartAppTests.CartTests
         [Test]
         public void AndCartContainsOneProduct_ThenProductShouldBeRemovedFromCart()
         {
-            Cart cart = new Cart(CartId.NewCartId());
-            Product product = new Product(ProductId.NewProductId(), "Milk", 80);
-            ProductAddedEvent productAddedEvent = new ProductAddedEvent(product);
-            cart.Apply(productAddedEvent);
+            Product milk = Create.Product().Milk();
+            Cart cart = Create.Cart()
+                .WithProduct(milk)
+                .Please();
             Assert.AreEqual(cart.Products.Count, 1);
             
-            ProductRemovedEvent productRemovedEvent = new ProductRemovedEvent(product);
+            ProductRemovedEvent productRemovedEvent = new ProductRemovedEvent(milk);
 
             cart.Apply(productRemovedEvent);
             
