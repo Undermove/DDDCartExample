@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using EventFlow.DependencyInjection.Extensions;
 using EventFlow.Aggregates;
 using System.Data.Common;
+using DDDCartAppTests.DSL;
 using EventFlow.EntityFramework.Extensions;
 using EventFlow.EntityFramework;
 
@@ -47,11 +48,10 @@ namespace DDDCartAppTests
         }
 
         [Test]
-        public void DeleteProductFromCartTest()
+        public async Task DeleteProductFromCartTest()
         {
             var services = new ServiceCollection();
             services.AddTransient<IProductRepository, FakeProductRepository>();
-
             using var resolver = EventFlowOptions.New
                 .UseServiceCollection(services)
                 .AddDefaults(typeof(CartContext).Assembly)
@@ -62,6 +62,18 @@ namespace DDDCartAppTests
                 .AddCommands(typeof(AddProductCommand), typeof(RemoveProductCommand))
                 .AddCommandHandlers(typeof(AddProductCommandHandler), typeof(RemoveProductCommandHandler))
                 .CreateResolver();
+            var commandBus = resolver.Resolve<ICommandBus>();
+            CartId cartId = CartId.NewCartId();
+            ProductId productId = new ProductId(Guid.Empty);
+            await commandBus.PublishAsync(new AddProductCommand(cartId, productId), CancellationToken.None);
+            var aggregateStore = resolver.Resolve<IAggregateStore>();
+            var cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
+            Assert.AreEqual(1, cart.Products.Count);
+
+            await commandBus.PublishAsync(new RemoveProductCommand(cartId, productId), CancellationToken.None);
+            
+            cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
+            Assert.AreEqual(0, cart.Products.Count);
         }
 
         private static Uri GetUriFromConnectionString(string connectionString)

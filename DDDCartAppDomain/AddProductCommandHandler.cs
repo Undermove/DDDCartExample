@@ -5,7 +5,7 @@ using EventFlow.Commands;
 
 namespace DDDCartAppDomain
 {
-    public class AddProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, AddProductCommand>
+    public class AddProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, AddProductCommand> 
     {
         private readonly IProductRepository _productRepository;
 

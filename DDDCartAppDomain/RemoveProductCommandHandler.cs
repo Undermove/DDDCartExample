@@ -5,7 +5,7 @@ using EventFlow.Commands;
 
 namespace DDDCartAppDomain
 {
-    public class RemoveProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, AddProductCommand>
+    public class RemoveProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, RemoveProductCommand>
     {
         private IProductRepository _productRepository;
         
@@ -14,7 +14,7 @@ namespace DDDCartAppDomain
             _productRepository = productRepository;
         }
         
-        public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, AddProductCommand command, CancellationToken cancellationToken)
+        public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, RemoveProductCommand command, CancellationToken cancellationToken)
         {
             Product product = await _productRepository.GetProduct(command.ProductId);
 

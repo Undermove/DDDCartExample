@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EventFlow.Aggregates;
 
 namespace DDDCartAppDomain
 {
     public class Cart : AggregateRoot<Cart, CartId>,
-        IEmit<ProductAddedEvent>
+        IEmit<ProductAddedEvent>,
+        IEmit<ProductRemovedEvent>
     {
         private readonly List<Product> _products;
 
@@ -22,7 +24,8 @@ namespace DDDCartAppDomain
 
         public void Apply(ProductRemovedEvent productRemovedEvent)
         {
-            _products.Remove(productRemovedEvent.Product);
+            var productFromCart = _products.FirstOrDefault(product => product.Id == productRemovedEvent.Product.Id);
+            _products.Remove(productFromCart);
         }
         
         public void AddProduct(Product product)
