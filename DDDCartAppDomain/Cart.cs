@@ -20,6 +20,11 @@ namespace DDDCartAppDomain
             _products.Add(addProductEvent.Product);
         }
 
+        public void Apply(ProductRemovedEvent productRemovedEvent)
+        {
+            _products.Remove(productRemovedEvent.Product);
+        }
+        
         public void AddProduct(Product product)
         {
             Emit(new ProductAddedEvent(product));
