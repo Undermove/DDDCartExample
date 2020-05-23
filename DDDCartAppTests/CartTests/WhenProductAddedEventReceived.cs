@@ -3,9 +3,9 @@ using System.Linq;
 using DDDCartAppDomain;
 using NUnit.Framework;
 
-namespace DDDCartAppTests
+namespace DDDCartAppTests.CartTests
 {
-	public class CartTests
+	public class WhenProductAddedEventReceived
 	{
 		private Cart _cart;
 		private Product _product;
@@ -20,7 +20,7 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartShouldContainOneProduct()
+		public void ThenCartShouldContainOneProduct()
 		{
 			ProductAddedEvent addProductEvent = new ProductAddedEvent(_product);
 
@@ -31,7 +31,7 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartProductIdShouldBeEqualWithProductIdFromEvent()
+		public void ThenCartProductIdShouldBeEqualWithProductIdFromEvent()
 		{
 			ProductAddedEvent addProductEvent = new ProductAddedEvent(_product);
 
@@ -43,7 +43,7 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartProductNameShouldBeEqualWithProductNameFromEvent()
+		public void ThenCartProductNameShouldBeEqualWithProductNameFromEvent()
 		{
 			ProductAddedEvent addProductEvent = new ProductAddedEvent(_product);
 
@@ -55,7 +55,7 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartProductPriceShouldBeEqualWithProductPriceFromEvent()
+		public void ThenCartProductPriceShouldBeEqualWithProductPriceFromEvent()
 		{
 			ProductAddedEvent productAdded = new ProductAddedEvent(_product);
 
@@ -65,7 +65,7 @@ namespace DDDCartAppTests
 		}
 
 		[Test]
-		public void WhenTwoProductAddedEventsReceived_ThenCartShouldContainTwoProducts()
+		public void Twice_ThenCartShouldContainTwoProducts()
 		{
 			ProductAddedEvent firstProductAddedEvent = new ProductAddedEvent(_product);
 			ProductAddedEvent secondProductAddedEvent = new ProductAddedEvent(_product);

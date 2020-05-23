@@ -7,10 +7,10 @@ services:
     ports:
       - "3306:3306"
 
-  pgsql:
-    image: postgres
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "my_password"
-    ports:
-      - "5432:5432"
+#  pgsql:
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "my_password"
+#    ports:
+#      - "5432:5432"
