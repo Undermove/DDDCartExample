@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DDDCartAppTests
 {
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class MySqlCartContextProvider: IDbContextProvider<CartContext>
 	{
 		private DbContextOptions<CartContext> _options;

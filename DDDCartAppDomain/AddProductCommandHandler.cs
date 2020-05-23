@@ -18,6 +18,11 @@ namespace DDDCartAppDomain
         {
             Product product = await _productRepository.GetProduct(command.ProductId);
 
+            if (product == null)
+            {
+               return ExecutionResult.Failed();
+            }
+            
             aggregate.AddProduct(product);
 
             return ExecutionResult.Success();

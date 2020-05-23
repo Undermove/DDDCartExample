@@ -29,5 +29,10 @@ namespace DDDCartAppDomain
         {
             Emit(new ProductAddedEvent(product));
         }
+
+        public void RemoveProduct(Product product)
+        {
+            Emit(new ProductRemovedEvent(product));
+        }
     }
 }

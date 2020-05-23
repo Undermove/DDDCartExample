@@ -1,6 +1,9 @@
-﻿namespace DDDCartAppDomain
+﻿using EventFlow.Aggregates;
+using EventFlow.Entities;
+
+namespace DDDCartAppDomain
 {
-    public class ProductRemovedEvent
+    public class ProductRemovedEvent : IAggregateEvent<Cart, CartId>
     {
         public ProductRemovedEvent(Product product)
         {

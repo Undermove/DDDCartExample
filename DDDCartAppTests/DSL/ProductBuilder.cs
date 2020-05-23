@@ -8,5 +8,10 @@ namespace DDDCartAppTests.DSL
         {
             return new Product(ProductId.NewProductId(), "Milk", 80);
         }
+
+        public Product MeatBalls()
+        {
+            return new Product(ProductId.NewProductId(), "Meatballs", 200);
+        }
     }
 }

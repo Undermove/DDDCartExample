@@ -17,7 +17,7 @@ namespace DDDCartAppTests
     public class CommandBusTests
     {
         [Test]
-        public async Task CommandBusTest()
+        public async Task AddProductToCartTest()
         {
             var services = new ServiceCollection();
             services.AddTransient<IProductRepository, FakeProductRepository>();
@@ -44,6 +44,24 @@ namespace DDDCartAppTests
             Cart cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
 
             Assert.AreEqual(1, cart.Products.Count);
+        }
+
+        [Test]
+        public void DeleteProductFromCartTest()
+        {
+            var services = new ServiceCollection();
+            services.AddTransient<IProductRepository, FakeProductRepository>();
+
+            using var resolver = EventFlowOptions.New
+                .UseServiceCollection(services)
+                .AddDefaults(typeof(CartContext).Assembly)
+                .UseEntityFrameworkEventStore<CartContext>()
+                .ConfigureEntityFramework(EntityFrameworkConfiguration.New) 
+                .AddDbContextProvider<CartContext, MySqlCartContextProvider>()
+                .AddEvents(typeof(ProductAddedEvent), typeof(ProductRemovedEvent))
+                .AddCommands(typeof(AddProductCommand), typeof(RemoveProductCommand))
+                .AddCommandHandlers(typeof(AddProductCommandHandler), typeof(RemoveProductCommandHandler))
+                .CreateResolver();
         }
 
         private static Uri GetUriFromConnectionString(string connectionString)
