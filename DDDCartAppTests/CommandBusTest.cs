@@ -12,6 +12,8 @@ using System.Data.Common;
 using DDDCartAppTests.DSL;
 using EventFlow.EntityFramework.Extensions;
 using EventFlow.EntityFramework;
+using EventFlow.RabbitMQ;
+using EventFlow.RabbitMQ.Extensions;
 
 namespace DDDCartAppTests
 {
@@ -23,6 +25,8 @@ namespace DDDCartAppTests
             var services = new ServiceCollection();
             services.AddTransient<IProductRepository, FakeProductRepository>();
 
+            var rmqUri = new Uri("amqp://admin:mypass@localhost:5673/vhost");
+            
             using var resolver = EventFlowOptions.New
                 .UseServiceCollection(services)
                 .AddDefaults(typeof(CartContext).Assembly)
@@ -32,14 +36,16 @@ namespace DDDCartAppTests
                 .AddEvents(typeof(ProductAddedEvent))
                 .AddCommands(typeof(AddProductCommand))
                 .AddCommandHandlers(typeof(AddProductCommandHandler))
+                .PublishToRabbitMq(RabbitMqConfiguration.With(rmqUri))
                 .CreateResolver();
 
             var commandBus = resolver.Resolve<ICommandBus>();
             var aggregateStore = resolver.Resolve<IAggregateStore>();
 
             CartId cartId = CartId.NewCartId();
+            
             await commandBus.PublishAsync(
-                new AddProductCommand(cartId, new ProductId(Guid.Empty)), 
+                new AddProductCommand(cartId, new ProductId(Guid.Empty)),
                 CancellationToken.None);
 
             Cart cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
