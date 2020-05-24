@@ -7,6 +7,17 @@ services:
     ports:
       - "3306:3306"
 
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+      - RABBITMQ_DEFAULT_VHOST=vhost
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    
 #  pgsql:
 #    image: postgres
 #    environment:
